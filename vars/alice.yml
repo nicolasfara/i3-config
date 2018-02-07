@@ -1,0 +1,24 @@
+# => inherits: generic <= #
+
+ hidpi: true
+
+ i3:
+     mod_key: Mod4
+     terminal: st
+     terminal_tmux: st -e tmux
+     i3lock: i3lock -ei /home/nicolas/Pictures/i3lock/gentoo_grey_4k_by_tuggbuss-dbuj357.png
+     launcher: rofi -show run
+     brightness_inc: xbacklight -inc 10
+     brightness_dec: xbacklight -dec 10
+     calc: speedcrunch
+
+ font:
+     name: Hack
+     size: 8
+ 
+ audio:
+     volume_up: amixer -q set Master 2%+
+     volume_down: amixer -q set Master 2%-
+     volume_toggle: amixer -q -D pulse set Master toggle
+
+ # vim: set filetype=eruby.yaml :

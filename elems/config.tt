@@ -1,0 +1,294 @@
+# ───────────────────────────────────────────────────────────────────┐
+#
+# Name:    elems/config.tt                                           
+# Summary: i3 configuration.                                         
+# Authors:                                                           
+#   - Nicolas Farabegoli <nicolas.farabegoli@gmail.com> (nicolasfara)    
+#                                                                    
+# Project:                                                           
+#   - Homepage:        https://github.com/nicolasfara/i3-config       
+#   - Getting started: see README.md in the project root folder      
+#                                                                    
+# License: Apache v2.0 (see below)                                   
+#
+# ───────────────────────────────────────────────────────────────────┤
+#
+# Copyright  2018 
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+# or implied. See the License for the specific language governing
+# permissions and limitations under the License.
+#
+# ───────────────────────────────────────────────────────────────────┘
+
+
+# ──────────────────────────────────────────────────── Local var ────┐
+<%
+    define_locals do
+        variable "hidpi", as: :hidpi
+        variable "i3.mod_key", as: :mod_key
+        variable "i3.terminal", as: :terminal
+        variable "i3.terminal_tmux", as: :terminal_tmux
+        variable "i3.launcher", as: :launcher
+        variable "i3.brightness_inc", as: :brightness_inc
+        variable "i3.brightness_dec", as: :brightness_dec
+        variable "i3.calc", as: :calc
+        variable "audio.volume_up", as: :volume_up
+        variable "audio.volume_down", as: :volume_down
+        variable "audio.volume_toggle", as: :volume_toggle
+        variable "font.name", as: :font_name
+        variable "font.size", as: :font_size
+    end
+
+    def notify_and_exec(msg, cmd)
+        "notify-send '#{msg}'; #{cmd}"
+    end
+
+    def scale(size)
+        if local! :hidpi
+            size * 2
+        else
+            size
+        end
+    end
+%>
+# ───────────────────────────────────────────────────────────────────┘
+
+# ─────────────────────────────────────────────────────── Mod Key ────
+set $mod <%= local! :mod_key %>
+
+# ────────────────────────────────────────────────────────── Font ────
+set $font pango:<%= local! :font_name %> <%= local! :font_size %>
+font $font
+
+# ────────────────────────────────────────────────────────── Font ────
+set $term <%= local! :terminal %>
+
+# ────────────────────────────────────────────────────────── Font ────
+<% if local? :startup_cmd %>
+# TODO
+<% end %>
+
+# ──────────────────────────────────────────────────── Appearance ────
+# class                 border  bground text    indicator child_border
+client.focused          #0288D1 #01579B #EEEEEE #2E9EF4   #01579B
+client.focused_inactive #333333 #5F676A #EEEEEE #484E50   #5F676A
+client.unfocused        #333333 #222222 #888888 #292D2E   #222222
+client.urgent           #2F343A #F44336 #EEEEEE #F44336   #F44336
+client.placeholder      #212121 #0C0C0C #EEEEEE #212121   #212121
+client.background       #EEEEEE
+
+# ──────────────────────────────────────────────── Windows Layout ────
+default_orientation vertical 
+force_focus_wrapping no
+force_display_urgency_hint 512 ms
+focus_on_window_activation smart
+
+# Set floating app
+for_window [class="idea-community$"] floating enable
+
+#Dunst
+exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
+
+# ──────────────────────────────────────────────────── Status Bar ────
+bar {
+	
+	status_command py3status
+
+	workspace_buttons yes
+	binding_mode_indicator yes
+    <% if local? :two_monitor %>
+	    tray_output primary
+    <% end %>
+	position top
+	mode dock
+	font $font
+
+	separator_symbol "│"
+    
+    colors {
+        background #212121
+        statusline #BDBDBD
+        separator  #666666
+
+        focused_workspace  #0288D1 #01579B #EEEEEE
+        active_workspace   #333333 #222222 #EEEEEE
+        inactive_workspace #333333 #222222 #888888
+        urgent_workspace   #2F343A #F44336 #EEEEEE
+        binding_mode       #2F343A #F44336 #EEEEEE
+    }
+}
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# ────────────────────────────────────────────────────── Keybinds ────
+# Start a terminal (without tmux)
+bindsym $mod+Return exec "<%= local! :terminal %>"
+
+# Start a terminal (with tmux)
+bindsym $mod+Shift+Return exec "<%= local! :terminal_tmux %>"
+
+# Kill focused window
+bindsym $mod+Shift+c kill
+
+# Start program launcher
+bindsym $mod+p exec "<%= local! :launcher %>" 
+
+# Reload the configuration file
+bindsym $mod+Shift+r reload
+
+# Restart i3 inplace (preserves layout/session)
+bindsym $mod+q restart
+
+# Exit i3 (logout of X session)
+bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# i3lock
+bindsym Ctrl+Mod1+l exec "i3lock -ei /home/nicolas/Pictures/i3lock/gentoo_grey_4k_by_tuggbuss-dbuj357.png"
+
+# Calculator
+bindsym XF86Calculator exec "<%= local! :calc %>"
+
+# Brightness keybind
+bindsym XF86MonBrightnessUp exec "<%= local! :brightness_inc %>"
+bindsym XF86MonBrightnessDown exec "<%= local! :brightness_dec %>"
+
+# Volume keybing
+bindsym XF86AudioRaiseVolume exec "<%= local! :volume_up %>; py3-cmd refresh volume_status"
+bindsym XF86AudioLowerVolume exec "<%= local! :volume_down %>; py3-cmd refresh volume_status"
+bindsym XF86AudioMute exec "<%= local! :volume_toggle %>; py3-cmd refresh volume_status"
+
+# ────────────────────────────────────────────── focus ← Keybinds ────
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+v split h
+
+# split in vertical orientation
+bindsym $mod+h split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# Custom Workspace
+set $www "1 "
+set $ter "2 "
+set $ide "4 "
+set $audio "5 "
+
+# Switch to workspace
+bindsym $mod+1 workspace number $www
+bindsym $mod+2 workspace number $ter
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace number $ide
+bindsym $mod+5 workspace number $audio
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# Mode for window resizing
+mode "resize" {
+  # Pressing left will shrink the window’s width.
+  # Pressing right will grow the window’s width.
+  # Pressing up will shrink the window’s height.
+  # Pressing down will grow the window’s height.
+  bindsym j resize shrink width 10 px or 10 ppt
+  bindsym k resize grow height 10 px or 10 ppt
+  bindsym l resize shrink height 10 px or 10 ppt
+  bindsym semicolon resize grow width 10 px or 10 ppt
+
+  # same bindings, but for the arrow keys
+  bindsym Left resize shrink width 10 px or 10 ppt
+  bindsym Down resize grow height 10 px or 10 ppt
+  bindsym Up resize shrink height 10 px or 10 ppt
+  bindsym Right resize grow width 10 px or 10 ppt
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Mode for changing layout
+mode "layout" {
+  # Change container layout
+  # => toggle tabbed
+  bindsym q layout tabbed
+  # => toggle stacking
+  bindsym w layout stacking
+  # => toggle split vertical
+  bindsym e layout splitv
+  # => toggle split horizontal
+  bindsym r layout splith
+  # => toggle all
+  bindsym d layout toggle all
+
+  # Change orientation
+  # => vertical
+  bindsym a split v
+  # => horizontal
+  bindsym s split h
+
+  bindsym Escape mode "default"
+  bindsym Return mode "default"
+}
+bindsym $mod+d mode "layout"
