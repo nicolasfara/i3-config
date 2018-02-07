@@ -65,9 +65,6 @@ set $mod <%= local! :mod_key %>
 set $font pango:<%= local! :font_name %> <%= local! :font_size %>
 font $font
 
-# ────────────────────────────────────────────────────────── Font ────
-set $term <%= local! :terminal %>
-
 # ─────────────────────────────────────────────────────── Startup ────
 <% if local? :startup_cmd %>
 exec megasync
