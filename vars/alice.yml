@@ -1,3 +1,4 @@
 # => inherits: generic, with-hidpi <= #
-
+ features:
+     startup_cmd:
  # vim: set filetype=eruby.yaml :
