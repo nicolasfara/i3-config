@@ -2,10 +2,10 @@
       
  - src: ^(config)$
    dst: ~/.config/i3/config
-   only: f?i3
+   #only: f?i3
 
  - src: ^(i3status.conf)$
    dst: ~/.i3status.conf
-   only: f?i3
+   #only: f?i3
 
  # vim: set filetype=eruby.yaml :

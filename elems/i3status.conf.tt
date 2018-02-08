@@ -7,6 +7,7 @@ general {
 }
 
 order += "static_string"
+order += "timer"
 order += "taskwarrior"
 order += "bluetooth"
 order += "spotify"
@@ -19,6 +20,10 @@ order += "clock"
 
 static_string {
     format = ""
+}
+
+timer {
+    format = "{timer}"
 }
 
 clock {
@@ -93,6 +98,6 @@ spotify {
 }
 
 taskwarrior {
-    format = '{task}'
+    format = "{task}"
     cache_timeout = 2
 }
