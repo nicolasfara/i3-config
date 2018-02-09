@@ -50,7 +50,7 @@ uptime {
 sysdata {
     mem_unit = 'dynamic'
     cache_timeout = 1
-    format = " [\?color=cpu {cpu_usage}%]  [\?color=mem {mem_used}/{mem_total} {mem_unit}]  [\?color=temp {cpu_temp} {temp_unit}]"
+    format = " [\?color=cpu {cpu_usage}%]  [\?color=temp {cpu_temp} {temp_unit}]"
 }
 
 group netinfo {
