@@ -237,6 +237,10 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
+# Set windows should be floating by default
+for_window [class="^SpeedCrunch"]	floating enable, resize set <%= scale 640 %> <%= scale 360 %>
+for_window [class=".*"] move position center
+
 # Mode for window resizing
 mode "resize" {
   # Pressing left will shrink the window’s width.
