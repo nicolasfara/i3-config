@@ -35,6 +35,7 @@
         variable "i3.terminal", as: :terminal
         variable "i3.terminal_tmux", as: :terminal_tmux
         variable "i3.launcher", as: :launcher
+        variable "i3.i3lock", as: :i3lock
         variable "i3.brightness_inc", as: :brightness_inc
         variable "i3.brightness_dec", as: :brightness_dec
         variable "i3.calc", as: :calc
@@ -84,9 +85,6 @@ default_orientation vertical
 force_focus_wrapping no
 force_display_urgency_hint 512 ms
 focus_on_window_activation smart
-
-# Set floating app
-for_window [class="idea-community$"] floating enable
 
 #Dunst
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
@@ -146,7 +144,7 @@ bindsym $mod+q restart
 bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # i3lock
-bindsym Ctrl+Mod1+l exec "i3lock -ei /home/nicolas/Pictures/i3lock/gentoo_grey_4k_by_tuggbuss-dbuj357.png"
+bindsym Ctrl+Mod1+l exec "<%= local! :i3lock %>"
 
 # Calculator
 bindsym XF86Calculator exec "<%= local! :calc %>"
@@ -238,6 +236,7 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # Set windows should be floating by default
+for_window [class="^idea-community"] floating enable
 for_window [class="^SpeedCrunch"]	floating enable, resize set <%= scale 640 %> <%= scale 360 %>
 for_window [class=".*"] move position center
 

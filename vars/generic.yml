@@ -5,7 +5,7 @@
      mod_key: Mod4
      terminal: st
      terminal_tmux: st -e tmux
-     i3lock: i3lock -ei /home/nicolas/Pictures/i3lock/gentoo_grey_4k_by_tuggbuss-dbuj357.png
+     i3lock: i3lock -ei /home/nicolas/Pictures/i3lock/rt98ypy24a0z.png
      launcher: rofi -show run
      brightness_inc: xbacklight -inc 10
      brightness_dec: xbacklight -dec 10
