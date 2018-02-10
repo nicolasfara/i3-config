@@ -9,7 +9,9 @@ general {
 order += "static_string"
 order += "timer"
 order += "taskwarrior"
-order += "bluetooth"
+<% if has_feature? :bluetooth %>
+	order += "bluetooth"
+<% end %>
 order += "spotify"
 order += "volume_status"
 order += "group netinfo"
@@ -31,7 +33,7 @@ clock {
 }
 
 battery_level {
-  hide_when_full = False 
+  hide_when_full = False
   notify_low_level = True
   format = " {percent}%"
   notification = True
@@ -50,7 +52,7 @@ uptime {
 sysdata {
     mem_unit = 'dynamic'
     cache_timeout = 1
-    format = " [\?color=cpu {cpu_usage}%]  [\?color=temp {cpu_temp} {temp_unit}]"
+    format = " [\?color=cpu {cpu_usage}%]<% if has_feature? :temp %>  [\?color=temp {cpu_temp} {temp_unit}]<% end %>"
 }
 
 group netinfo {
@@ -65,7 +67,9 @@ group netinfo {
   format_button_open = "⇅"
 
   whatismyip {}
-  wifi {}
+  <% if has_feature? :wifi %>
+	wifi {}
+	<% end %>
   net_rate {
     hide_if_zero = True
 
