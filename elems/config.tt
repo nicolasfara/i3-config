@@ -207,7 +207,7 @@ bindsym $mod+a focus parent
 
 # Custom Workspace
 set $www "1 "
-set $ter "2 "
+set $ter "2 " 
 set $ide "4 "
 set $audio "5 "
 
