@@ -1,7 +1,7 @@
 # => inherits: generic, with-hidpi <= #
- features:
-   - bluetooth
-   - temp
-   - wifi
+features:
+  - bluetooth
+  - temp
+  - wifi
 
  # vim: set filetype=eruby.yaml :
