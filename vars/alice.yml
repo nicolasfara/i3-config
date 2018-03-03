@@ -1,4 +1,4 @@
-# => inherits: generic, with-hidpi <= #
+# => inherits: generic, with-hidpi, base16-ocean <= #
 features:
   - bluetooth
   - temp

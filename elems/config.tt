@@ -44,6 +44,23 @@
         variable "audio.volume_toggle", as: :volume_toggle
         variable "font.name", as: :font_name
         variable "font.size", as: :font_size
+        
+        variable "colors.base00", as: :base00
+        variable "colors.base01", as: :base01
+        variable "colors.base02", as: :base02
+        variable "colors.base03", as: :base03
+        variable "colors.base04", as: :base04
+        variable "colors.base05", as: :base05
+        variable "colors.base06", as: :base06
+        variable "colors.base07", as: :base07
+        variable "colors.base08", as: :base08
+        variable "colors.base09", as: :base09
+        variable "colors.base0A", as: :base0A
+        variable "colors.base0B", as: :base0B
+        variable "colors.base0C", as: :base0C
+        variable "colors.base0D", as: :base0D
+        variable "colors.base0E", as: :base0E
+        variable "colors.base0F", as: :base0F
     end
 
     def notify_and_exec(msg, cmd)
@@ -59,6 +76,23 @@
     end
 %>
 
+set $base00 <%= local! :base00 %>
+set $base01 <%= local! :base01 %>
+set $base02 <%= local! :base02 %>
+set $base03 <%= local! :base03 %>
+set $base04 <%= local! :base04 %>
+set $base05 <%= local! :base05 %>
+set $base06 <%= local! :base06 %>
+set $base07 <%= local! :base07 %>
+set $base08 <%= local! :base08 %>
+set $base09 <%= local! :base09 %>
+set $base0A <%= local! :base0A %>
+set $base0B <%= local! :base0B %>
+set $base0C <%= local! :base0C %>
+set $base0D <%= local! :base0D %>
+set $base0E <%= local! :base0E %>
+set $base0F <%= local! :base0F %>
+
 # ─────────────────────────────────────────────────────── Mod Key ────
 set $mod <%= local! :mod_key %>
 
@@ -71,14 +105,25 @@ font $font
 exec megasync
 <% end %>
 
+<%
 # ──────────────────────────────────────────────────── Appearance ────
 # class                 border  bground text    indicator child_border
-client.focused          #0288D1 #01579B #EEEEEE #2E9EF4   #01579B
-client.focused_inactive #333333 #5F676A #EEEEEE #484E50   #5F676A
-client.unfocused        #333333 #222222 #888888 #292D2E   #222222
-client.urgent           #2F343A #F44336 #EEEEEE #F44336   #F44336
-client.placeholder      #212121 #0C0C0C #EEEEEE #212121   #212121
-client.background       #EEEEEE
+#client.focused          #0288D1 #01579B #EEEEEE #2E9EF4   #01579B
+#client.focused_inactive #333333 #5F676A #EEEEEE #484E50   #5F676A
+#client.unfocused        #333333 #222222 #888888 #292D2E   #222222
+#client.urgent           #2F343A #F44336 #EEEEEE #F44336   #F44336
+#client.placeholder      #212121 #0C0C0C #EEEEEE #212121   #212121
+#client.background       #EEEEEE
+%>
+
+# ──────────────────────────────────────────────────── Appearance ────
+# class                 border  bground text    indicator child_border
+client.focused          $base05 $base0D $base00 $base0D   $base0D
+client.focused_inactive $base01 $base01 $base05 $base03   $base01
+client.unfocused        $base01 $base00 $base05 $base01   $base01
+client.urgent           $base08 $base08 $base00 $base08   $base08
+client.placeholder      $base00 $base00 $base05 $base00   $base00
+client.background       $base07
 
 # ──────────────────────────────────────────────── Windows Layout ────
 default_orientation vertical
@@ -106,15 +151,27 @@ bar {
   separator_symbol "│"
 
     colors {
-        background #212121
-        statusline #BDBDBD
-        separator  #666666
+      <%
+      #background #212121
+      #statusline #BDBDBD
+      #separator  #666666
 
-        focused_workspace  #0288D1 #01579B #EEEEEE
-        active_workspace   #333333 #222222 #EEEEEE
-        inactive_workspace #333333 #222222 #888888
-        urgent_workspace   #2F343A #F44336 #EEEEEE
-        binding_mode       #2F343A #F44336 #EEEEEE
+      #focused_workspace  #0288D1 #01579B #EEEEEE
+      #active_workspace   #333333 #222222 #EEEEEE
+      #inactive_workspace #333333 #222222 #888888
+      #urgent_workspace   #2F343A #F44336 #EEEEEE
+      %>
+
+      background $base00
+      separator  $base01
+      statusline $base04
+
+      # State             Border  BG      Text
+      focused_workspace   $base05 $base0D $base00
+      active_workspace    $base05 $base03 $base00
+      inactive_workspace  $base03 $base01 $base05
+      urgent_workspace    $base08 $base08 $base00
+      binding_mode        $base00 $base0A $base00
     }
 }
 
