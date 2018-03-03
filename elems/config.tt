@@ -162,8 +162,8 @@ bar {
       #urgent_workspace   #2F343A #F44336 #EEEEEE
       %>
 
-      background $base00
-      separator  $base01
+      background $base01
+      separator  $base05
       statusline $base04
 
       # State             Border  BG      Text
