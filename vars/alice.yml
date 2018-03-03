@@ -1,4 +1,4 @@
-# => inherits: generic, with-hidpi, base16-altelier-seaside<= #
+# => inherits: generic, with-hidpi, base16-terminal <= #
 features:
   - bluetooth
   - temp
