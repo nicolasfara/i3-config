@@ -137,7 +137,7 @@ exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 # ──────────────────────────────────────────────────── Status Bar ────
 bar {
 
-  status_command py3status
+  status_command py3status --dbus-notify
 
   workspace_buttons yes
   binding_mode_indicator yes
