@@ -264,9 +264,10 @@ bindsym $mod+a focus parent
 
 # Custom Workspace
 set $www "1 "
-set $ter "2 " 
+set $ter "2 "
 set $ide "4 "
 set $audio "5 "
+set $msg "7 "
 
 # Switch to workspace
 bindsym $mod+1 workspace number $www
@@ -275,7 +276,7 @@ bindsym $mod+3 workspace 3
 bindsym $mod+4 workspace number $ide
 bindsym $mod+5 workspace number $audio
 bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
+bindsym $mod+7 workspace number $msg
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
@@ -287,13 +288,17 @@ bindsym $mod+Shift+3 move container to workspace 3
 bindsym $mod+Shift+4 move container to workspace number $ide
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace number $audio
-bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+7 move container to workspace number $msg
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # Set windows should be floating by default
-for_window [class="IntelliJ"] floating enable
+assign [class="^jetbrains-idea"] → $ide
+assign [class="Spotify"] → $audio
+assign [class="TelegramDesktop"] → $msg
+for_window [class="^jetbrains-idea"] floating enabled
+for_window [class="^jetbrains-idea" instance="sun-awt-X11-XFramePeer"] floating disable
 for_window [class="^SpeedCrunch"]	floating enable, resize set <%= scale 640 %> <%= scale 360 %>
 for_window [class=".*"] move position center
 
