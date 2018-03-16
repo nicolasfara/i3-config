@@ -298,7 +298,7 @@ assign [class="^jetbrains-idea"] → $ide
 assign [class="Spotify"] → $audio
 assign [class="TelegramDesktop"] → $msg
 for_window [class="^jetbrains-idea"] floating enabled
-for_window [class="^jetbrains-idea" instance="sun-awt-X11-XFramePeer"] floating disable
+for_window [class="^jetbrains-idea" instance="sun-awt-X11-XFramePeer"] floating disable, move position center
 for_window [class="^SpeedCrunch"]	floating enable, resize set <%= scale 640 %> <%= scale 360 %>
 for_window [class=".*"] move position center
 
