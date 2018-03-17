@@ -1,16 +1,16 @@
 general {
-  colors = true
-  interval = 5
-  color_good = "#66BB6A"
-  color_degraded = "#FFEB3B"
-  color_bad = "#F44336"
+    colors = true
+    interval = 5
+    color_good = "#66BB6A"
+    color_degraded = "#FFEB3B"
+    color_bad = "#F44336"
 }
 
 order += "static_string"
 order += "timer"
 order += "taskwarrior"
 <% if has_feature? :bluetooth %>
-	order += "bluetooth"
+    order += "bluetooth"
 <% end %>
 order += "spotify"
 order += "volume_status"
@@ -33,13 +33,13 @@ clock {
 }
 
 battery_level {
-  blocks = ""
-  hide_when_full = False
-  notify_low_level = True
-  format = "{icon} {percent}%"
-  notification = True
-  format_notify_charging = " {percent}%≈{time_remaining}"
-  format_notify_discharging = " {percent}%≈{time_remaining}"
+    blocks = ""
+    hide_when_full = False
+    notify_low_level = True
+    format = "{icon} {percent}%"
+    notification = True
+    format_notify_charging = " {percent}%≈{time_remaining}"
+    format_notify_discharging = " {percent}%≈{time_remaining}"
 }
 
 bluetooth {
@@ -47,7 +47,7 @@ bluetooth {
 }
 
 uptime {
-  format = "↻ [\?if=weeks {weeks}w][\?if=days {days}d][\?if=hours {hours}h][\?if=minutes {minutes}m]"
+    format = "↻ [\?if=weeks {weeks}w][\?if=days {days}d][\?if=hours {hours}h][\?if=minutes {minutes}m]"
 }
 
 sysdata {
@@ -57,26 +57,23 @@ sysdata {
 }
 
 group netinfo {
-  cycle = 0
+    cycle = 0
+    click_mode = "all"
+    button_next = 1
+    button_prev = 3
+    format = "{output} {button}"
+    format_button_closed = "✗"
+    format_button_open = "⇅"
 
-  click_mode = "all"
-  button_next = 1
-  button_prev = 3
-
-  format = "{output} {button}"
-  format_button_closed = "✗"
-  format_button_open = "⇅"
-
-  whatismyip {}
-  <% if has_feature? :wifi %>
-	wifi {}
-	<% end %>
-  net_rate {
-    hide_if_zero = True
-
-    format = "{interface} ⇅ {total}"
-    format_value = "{value:.1f} {unit}"
-  }
+    whatismyip {}
+    <% if has_feature? :wifi %>
+  	wifi {}
+  	<% end %>
+    net_rate {
+        hide_if_zero = True
+        format = "{interface} ⇅ {total}"
+        format_value = "{value:.1f} {unit}"
+    }
 }
 
 volume_status {
@@ -106,3 +103,5 @@ taskwarrior {
     format = "{task}"
     cache_timeout = 2
 }
+
+# vim: set filetype=eruby.conf ts=4 sw=4 et :

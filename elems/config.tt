@@ -44,7 +44,7 @@
         variable "audio.volume_toggle", as: :volume_toggle
         variable "font.name", as: :font_name
         variable "font.size", as: :font_size
-        
+
         variable "colors.base00", as: :base00
         variable "colors.base01", as: :base01
         variable "colors.base02", as: :base02
@@ -137,41 +137,41 @@ exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 # ──────────────────────────────────────────────────── Status Bar ────
 bar {
 
-  status_command py3status --dbus-notify
+    status_command py3status --dbus-notify
 
-  workspace_buttons yes
-  binding_mode_indicator yes
-  <% if has_feature? :two_monitors %>
-  tray_output primary
-  <% end %>
-  position top
-  mode dock
-  font $font
+    workspace_buttons yes
+    binding_mode_indicator yes
+    <% if has_feature? :two_monitors %>
+    tray_output primary
+    <% end %>
+    position top
+    mode dock
+    font $font
 
-  separator_symbol "│"
+    separator_symbol "│"
 
     colors {
-      <%
-      #background #212121
-      #statusline #BDBDBD
-      #separator  #666666
+        <%
+        #background #212121
+        #statusline #BDBDBD
+        #separator  #666666
 
-      #focused_workspace  #0288D1 #01579B #EEEEEE
-      #active_workspace   #333333 #222222 #EEEEEE
-      #inactive_workspace #333333 #222222 #888888
-      #urgent_workspace   #2F343A #F44336 #EEEEEE
-      %>
+        #focused_workspace  #0288D1 #01579B #EEEEEE
+        #active_workspace   #333333 #222222 #EEEEEE
+        #inactive_workspace #333333 #222222 #888888
+        #urgent_workspace   #2F343A #F44336 #EEEEEE
+        %>
 
-      background $base01
-      separator  $base05
-      statusline $base04
+        background $base01
+        separator  $base05
+        statusline $base04
 
-      # State             Border  BG      Text
-      focused_workspace   $base05 $base0D $base00
-      active_workspace    $base05 $base03 $base00
-      inactive_workspace  $base03 $base01 $base05
-      urgent_workspace    $base08 $base08 $base00
-      binding_mode        $base00 $base0A $base00
+        # State             Border  BG      Text
+        focused_workspace   $base05 $base0D $base00
+        active_workspace    $base05 $base03 $base00
+        inactive_workspace  $base03 $base01 $base05
+        urgent_workspace    $base08 $base08 $base00
+        binding_mode        $base00 $base0A $base00
     }
 }
 
@@ -214,6 +214,9 @@ bindsym XF86MonBrightnessDown exec "<%= local! :brightness_dec %>"
 bindsym XF86AudioRaiseVolume exec "<%= local! :volume_up %>; py3-cmd refresh volume_status"
 bindsym XF86AudioLowerVolume exec "<%= local! :volume_down %>; py3-cmd refresh volume_status"
 bindsym XF86AudioMute exec "<%= local! :volume_toggle %>; py3-cmd refresh volume_status"
+
+# Take screenshot
+bindsym Print exec "scrot"
 
 # ────────────────────────────────────────────── focus ← Keybinds ────
 bindsym $mod+j focus left
@@ -297,56 +300,58 @@ bindsym $mod+Shift+0 move container to workspace 10
 assign [class="^jetbrains-idea"] → $ide
 assign [class="Spotify"] → $audio
 assign [class="TelegramDesktop"] → $msg
-for_window [class="^jetbrains-idea"] floating enabled
-for_window [class="^jetbrains-idea" instance="sun-awt-X11-XFramePeer"] floating disable, move position center
+for_window [class="^jetbrains-idea"] floating enabled, move position center
+for_window [class="^jetbrains-idea" instance="sun-awt-X11-XFramePeer"] floating disable
 for_window [class="^SpeedCrunch"]	floating enable, resize set <%= scale 640 %> <%= scale 360 %>
 for_window [class=".*"] move position center
 
 # Mode for window resizing
 mode "resize" {
-  # Pressing left will shrink the window’s width.
-  # Pressing right will grow the window’s width.
-  # Pressing up will shrink the window’s height.
-  # Pressing down will grow the window’s height.
-  bindsym j resize shrink width 10 px or 10 ppt
-  bindsym k resize grow height 10 px or 10 ppt
-  bindsym l resize shrink height 10 px or 10 ppt
-  bindsym semicolon resize grow width 10 px or 10 ppt
+    # Pressing left will shrink the window’s width.
+    # Pressing right will grow the window’s width.
+    # Pressing up will shrink the window’s height.
+    # Pressing down will grow the window’s height.
+    bindsym j resize shrink width 10 px or 10 ppt
+    bindsym k resize grow height 10 px or 10 ppt
+    bindsym l resize shrink height 10 px or 10 ppt
+    bindsym semicolon resize grow width 10 px or 10 ppt
 
-  # same bindings, but for the arrow keys
-  bindsym Left resize shrink width 10 px or 10 ppt
-  bindsym Down resize grow height 10 px or 10 ppt
-  bindsym Up resize shrink height 10 px or 10 ppt
-  bindsym Right resize grow width 10 px or 10 ppt
+    # same bindings, but for the arrow keys
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
 
-  # back to normal: Enter or Escape
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
 
 # Mode for changing layout
 mode "layout" {
-  # Change container layout
-  # => toggle tabbed
-  bindsym q layout tabbed
-  # => toggle stacking
-  bindsym w layout stacking
-  # => toggle split vertical
-  bindsym e layout splitv
-  # => toggle split horizontal
-  bindsym r layout splith
-  # => toggle all
-  bindsym d layout toggle all
+    # Change container layout
+    # => toggle tabbed
+    bindsym q layout tabbed
+    # => toggle stacking
+    bindsym w layout stacking
+    # => toggle split vertical
+    bindsym e layout splitv
+    # => toggle split horizontal
+    bindsym r layout splith
+    # => toggle all
+    bindsym d layout toggle all
 
-  # Change orientation
-  # => vertical
-  bindsym a split v
-  # => horizontal
-  bindsym s split h
+    # Change orientation
+    # => vertical
+    bindsym a split v
+    # => horizontal
+    bindsym s split h
 
-  bindsym Escape mode "default"
-  bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
 }
 bindsym $mod+d mode "layout"
+
+# vim: set filetype=eruby.conf ts=4 sw=4 :
