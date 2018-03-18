@@ -101,7 +101,10 @@ set $font pango:<%= local! :font_name %> <%= local! :font_size %>
 font $font
 
 # ─────────────────────────────────────────────────────── Startup ────
-<% if local? :startup_cmd %>
+<% if has_feature? :redshift %>
+exec redshift-gtk
+<% end %>
+<% if has_feature? :mega %>
 exec megasync
 <% end %>
 
