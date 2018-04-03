@@ -8,7 +8,9 @@ general {
 
 order += "static_string"
 order += "timer"
-order += "taskwarrior"
+<% if has_feature? :taskwarrior %>
+    order += "taskwarrior"
+<% end %>
 <% if has_feature? :bluetooth %>
     order += "bluetooth"
 <% end %>
@@ -53,7 +55,7 @@ uptime {
 sysdata {
     mem_unit = 'dynamic'
     cache_timeout = 1
-    format = " [\?color=cpu {cpu_usage}%]<% if has_feature? :temp %>  [\?color=temp {cpu_temp} {temp_unit}]<% end %>"
+    format = " [\?color=cpu {cpu_usage}%]<% if has_feature? :temp %>  [\?color=mem {mem_used} {mem_unit}]  [\?color=temp {cpu_temp} {temp_unit}]<% end %>"
 }
 
 group netinfo {
@@ -65,9 +67,11 @@ group netinfo {
     format_button_closed = "✗"
     format_button_open = "⇅"
 
-    whatismyip {}
+    #whatismyip {}
     <% if has_feature? :wifi %>
-  	wifi {}
+  	wifi {
+        format = "{ip}"
+        }
   	<% end %>
     net_rate {
         hide_if_zero = True
