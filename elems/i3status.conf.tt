@@ -20,6 +20,7 @@ order += "group netinfo"
 order += "sysdata"
 order += "uptime"
 order += "battery_level"
+order += "keyboard_layout"
 order += "clock"
 
 static_string {
@@ -42,6 +43,12 @@ battery_level {
     notification = True
     format_notify_charging = " {percent}%≈{time_remaining}"
     format_notify_discharging = " {percent}%≈{time_remaining}"
+}
+
+keyboard_layout {
+    button_next = 1
+    layouts = ['us', 'it']
+    format = " {layout}"
 }
 
 bluetooth {
