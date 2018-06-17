@@ -6,7 +6,7 @@ i3:
   terminal: st
   terminal_tmux: st -e tmux
   i3lock: i3lock -ei /home/nicolas/Pictures/i3lock/rt98ypy24a0z.png
-  launcher: rofi -show run
+  launcher: rofi -modi 'run,ssh,clipboard:greenclip print' -show run
   brightness_inc: xbacklight -inc 10
   brightness_dec: xbacklight -dec 10
   calc: speedcrunch
