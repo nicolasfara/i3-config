@@ -1,0 +1,7 @@
+# => inherits: generic, terminal-terminator, with-hidpi, base16-terminal, startup <= #
+features:
+  - bluetooth
+  - temp
+  - wifi
+
+ # vim: set filetype=eruby.yaml :

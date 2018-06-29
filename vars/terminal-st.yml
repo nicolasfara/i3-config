@@ -1,0 +1,3 @@
+i3:
+  terminal: st
+  terminal_tmux: st -e tmux

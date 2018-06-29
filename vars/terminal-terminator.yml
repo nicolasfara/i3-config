@@ -1,0 +1,3 @@
+i3:
+  terminal: terminator
+  terminal_tmux: terminator -e tmux
