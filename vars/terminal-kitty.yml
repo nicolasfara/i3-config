@@ -1,0 +1,3 @@
+i3:
+  terminal: kitty
+  terminal_tmux: kitty -e tmux

@@ -133,60 +133,54 @@ default_orientation vertical
 force_focus_wrapping no
 force_display_urgency_hint 512 ms
 focus_on_window_activation smart
+gaps inner 2
+gaps outer 2
 
 #Dunst
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # ──────────────────────────────────────────────────── Status Bar ────
-bar {
 
-    status_command py3status --dbus-notify
-
-    workspace_buttons yes
-    binding_mode_indicator yes
+#bar {
+#
+#    #status_command py3status --dbus-notify
+#
+#    workspace_buttons yes
+#    binding_mode_indicator yes
     <% if has_feature? :two_monitors %>
-    tray_output primary
+    #tray_output primary
     <% end %>
-    position top
-    mode dock
-    font $font
+#    position top
+#    mode dock
+#    font $font
+#
+#    separator_symbol "│"
+#
+#    colors {
+#        background $base01
+#        separator  $base05
+#        statusline $base04
+#
+#        # State             Border  BG      Text
+#        focused_workspace   $base05 $base0D $base00
+#        active_workspace    $base05 $base03 $base00
+#        inactive_workspace  $base03 $base01 $base05
+#        urgent_workspace    $base08 $base08 $base00
+#        binding_mode        $base00 $base0A $base00
+#    }
+#}
 
-    separator_symbol "│"
-
-    colors {
-        <%
-        #background #212121
-        #statusline #BDBDBD
-        #separator  #666666
-
-        #focused_workspace  #0288D1 #01579B #EEEEEE
-        #active_workspace   #333333 #222222 #EEEEEE
-        #inactive_workspace #333333 #222222 #888888
-        #urgent_workspace   #2F343A #F44336 #EEEEEE
-        %>
-
-        background $base01
-        separator  $base05
-        statusline $base04
-
-        # State             Border  BG      Text
-        focused_workspace   $base05 $base0D $base00
-        active_workspace    $base05 $base03 $base00
-        inactive_workspace  $base03 $base01 $base05
-        urgent_workspace    $base08 $base08 $base00
-        binding_mode        $base00 $base0A $base00
-    }
-}
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # ────────────────────────────────────────────────────── Keybinds ────
 # Start a terminal (without tmux)
-bindsym $mod+Return exec "<%= local! :terminal_tmux %>"
+bindsym $mod+Return exec "optirun <%= local! :terminal_tmux %>"
 
 # Start a terminal (with tmux)
-bindsym $mod+Shift+Return exec "<%= local! :terminal %>"
+bindsym $mod+Shift+Return exec "optirun <%= local! :terminal %>"
 
 # Kill focused window
 bindsym $mod+Shift+c kill
@@ -269,44 +263,73 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # Custom Workspace
-set $www "1 "
-set $ter "2 "
-set $ide "4 "
-set $audio "5 "
-set $msg "7 "
+set $www "1  "
+set $ter "2  "
+set $three "3  "
+set $ide "4  "
+set $audio "5  "
+set $six "6  "
+set $msg "7  "
+set $eight " 8 "
+set $nine " 9 "
 
 # Switch to workspace
-bindsym $mod+1 workspace number $www
-bindsym $mod+2 workspace number $ter
+#bindsym $mod+1 workspace number $www
+#bindsym $mod+2 workspace number $ter
+#bindsym $mod+3 workspace number $three
+#bindsym $mod+4 workspace number $ide
+#bindsym $mod+5 workspace number $audio
+#bindsym $mod+6 workspace number $six
+#bindsym $mod+7 workspace number $msg
+#bindsym $mod+8 workspace number $eight
+#bindsym $mod+9 workspace number $nine
+#bindsym $mod+0 workspace 10
+
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace number $ide
-bindsym $mod+5 workspace number $audio
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace number $msg
+bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # Move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $www
-bindsym $mod+Shift+2 move container to workspace number $ter
+#bindsym $mod+Shift+1 move container to workspace number $www
+#bindsym $mod+Shift+2 move container to workspace number $ter
+#bindsym $mod+Shift+3 move container to workspace number $three
+#bindsym $mod+Shift+4 move container to workspace number $ide
+#bindsym $mod+Shift+5 move container to workspace number $audio
+#bindsym $mod+Shift+6 move container to workspace number $six
+#bindsym $mod+Shift+7 move container to workspace number $msg
+#bindsym $mod+Shift+8 move container to workspace number $eight
+#bindsym $mod+Shift+9 move container to workspace number $nine
+#bindsym $mod+Shift+0 move container to workspace 10
+
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
 bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace number $ide
+bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace number $audio
-bindsym $mod+Shift+7 move container to workspace number $msg
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
+
 # Set windows should be floating by default
-assign [class="^jetbrains-idea"] → $ide
-assign [class="Spotify"] → $audio
-assign [class="TelegramDesktop"] → $msg
+assign [class="^jetbrains-idea"] → 4
+assign [class="^Spotify"] → 5
+assign [class="TelegramDesktop"] → 7
 for_window [class="^jetbrains-idea"] floating enabled, move position center
 for_window [class="^jetbrains-idea" instance="sun-awt-X11-XFramePeer"] floating disable
 for_window [class="^SpeedCrunch"]	floating enable, resize set <%= scale 640 %> <%= scale 360 %>
 for_window [class=".*"] move position center
+for_window [ class="it.unibo.*" instance="it.unibo.*" ] floating enable, resize set 1600 1200
+for_window [class="^.*"] border pixel 1
 
 # Mode for window resizing
 mode "resize" {

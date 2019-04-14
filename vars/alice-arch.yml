@@ -1,4 +1,4 @@
-# => inherits: generic, terminal-terminator, with-hidpi, base16-terminal, startup <= #
+# => inherits: generic, terminal-kitty, with-hidpi, base16-terminal, startup <= #
 features:
   - bluetooth
   - temp

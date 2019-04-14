@@ -3,8 +3,8 @@ features:
 
 i3:
   mod_key: Mod4
-  i3lock: i3lock -ei /home/nicolas/Pictures/i3lock/rt98ypy24a0z.png
-  launcher: rofi -modi 'run,ssh,clipboard:greenclip print' -show run
+  i3lock: i3lock -ei /home/nicolas/Pictures/i3lock/lock.png
+  launcher: rofi -modi 'run,ssh,clipboard:greenclip print' -show run -show-icons
   brightness_inc: xbacklight -inc 10
   brightness_dec: xbacklight -dec 10
   calc: speedcrunch
